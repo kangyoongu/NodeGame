@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+Ôªøusing System.Collections;
 using UnityEngine;
 
-public class RockScript : MonoBehaviour
+public class BoomScript : MonoBehaviour
 {
     Rigidbody2D rb;
     public float power = 50;
     bool addforce = false;
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +21,7 @@ public class RockScript : MonoBehaviour
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            // «√∑π¿ÃæÓø°º≠ ∏∂øÏΩ∫±Ó¡ˆ¿« πÊ«‚ ∫§≈Õ ∞ËªÍ
+            // ÌîåÎ†àÏù¥Ïñ¥ÏóêÏÑú ÎßàÏö∞Ïä§ÍπåÏßÄÏùò Î∞©Ìñ• Î≤°ÌÑ∞ Í≥ÑÏÇ∞
             Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
 
             rb.AddForce(direction * power, ForceMode2D.Impulse);
@@ -30,11 +30,18 @@ public class RockScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        PoolManager.Instance.Push("Rock", gameObject);
+        StartCoroutine(Destroy());
     }
     private void OnDisable()
     {
         rb.velocity = Vector2.zero;
         transform.position = Vector2.zero;
+    }
+
+    private IEnumerator Destroy()
+    {
+        yield return 3;
+        PoolManager.Instance.Pop("GrenadeExplosion", transform.position, Quaternion.identity);
+        PoolManager.Instance.Push("Grenade", gameObject);
     }
 }

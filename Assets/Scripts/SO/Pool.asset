@@ -19,3 +19,9 @@ MonoBehaviour:
   - prefab: {fileID: 3955587093575583965, guid: 6923abda76e0c804c8594eaceebcf72c, type: 3}
     prefabTypeName: Rock
     poolCount: 10
+  - prefab: {fileID: 918277246902348566, guid: c993215d0640a1842902bbc70b6cdfc3, type: 3}
+    prefabTypeName: Grenade
+    poolCount: 5
+  - prefab: {fileID: 5471463871395905542, guid: 648736ad8e7400d48a2304891024bcc2, type: 3}
+    prefabTypeName: GrenadeExplosion
+    poolCount: 5

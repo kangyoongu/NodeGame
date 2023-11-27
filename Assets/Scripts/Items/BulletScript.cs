@@ -5,7 +5,6 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public float speed = 2;
-    public float damage = 10;
     private void Start()
     {
         StartCoroutine(KillMe());
