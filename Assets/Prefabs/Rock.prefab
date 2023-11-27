@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6753202432476668123}
   m_Layer: 7
   m_Name: Rock
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 4
-  damage: 10
 --- !u!58 &6753202432476668123
 CircleCollider2D:
   m_ObjectHideFlags: 0

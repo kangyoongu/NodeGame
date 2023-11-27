@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class KnifeManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        RotateObjectTowardsMouse();
+        ClickMouse();
+    }
+
+    private void ClickMouse()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            PoolManager.Instance.Pop("Slash", transform.position, transform.rotation);
+        }
+    }
+
+    void RotateObjectTowardsMouse()
+    {
+        // 마우스 포인터의 위치를 가져오기
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f; // Z 값은 0으로 설정
+
+        // 오브젝트를 마우스 포인터 방향으로 회전시키기
+        transform.up = (mousePosition - transform.position).normalized;
     }
 }

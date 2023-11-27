@@ -25,3 +25,6 @@ MonoBehaviour:
   - prefab: {fileID: 5471463871395905542, guid: 648736ad8e7400d48a2304891024bcc2, type: 3}
     prefabTypeName: GrenadeExplosion
     poolCount: 5
+  - prefab: {fileID: 3559989853226580809, guid: ef656c629dfce1d4ab4cc237daa7ae89, type: 3}
+    prefabTypeName: Slash
+    poolCount: 20
