@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef843ff4ebdeee344a631d7c1ad9917f, type: 3}
+  m_Name: Pool
+  m_EditorClassIdentifier: 
+  pairs:
+  - prefab: {fileID: 3110497858415164932, guid: 78702188c4959fa4eadbc84845cfc683, type: 3}
+    prefabTypeName: Bullet
+    poolCount: 20
+  - prefab: {fileID: 3955587093575583965, guid: 6923abda76e0c804c8594eaceebcf72c, type: 3}
+    prefabTypeName: Rock
+    poolCount: 10
