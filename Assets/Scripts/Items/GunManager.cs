@@ -7,6 +7,7 @@ public class GunManager : MonoBehaviour
 {
     private Transform gunTransform;//ÃÑ È¸Àü
     private Transform gunPoint;
+    public AudioSource aud;
     void Awake()
     {
         gunTransform = transform.GetChild(0);
@@ -24,6 +25,7 @@ public class GunManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             PoolManager.Instance.Pop("Bullet", gunPoint.position, transform.localScale.x == 1 ? gunPoint.rotation : Quaternion.Euler(0, 180, -gunPoint.eulerAngles.z));
+            aud.PlayOneShot(aud.clip);
         }
     }
 

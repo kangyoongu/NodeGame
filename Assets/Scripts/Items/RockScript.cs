@@ -41,6 +41,7 @@ public class RockScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        PoolManager.Instance.Pop("RockBreak", transform.position, Quaternion.identity);
         PoolManager.Instance.Push("Rock", gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +54,7 @@ public class RockScript : MonoBehaviour
                 g.Hp -= damage;
                 ScoreManager.Instance.CurrentScore += 10;
             }
+            PoolManager.Instance.Pop("RockBreak", transform.position, Quaternion.identity);
             PoolManager.Instance.Push("Rock", gameObject);
         }
     }

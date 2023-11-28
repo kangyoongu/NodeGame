@@ -98,7 +98,7 @@ public class PlayerController : SingleTon<PlayerController>
             Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
             rb.velocity = movement;
 
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)//점프
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && isGrounded)//점프
             {
                 Jump();
             }
