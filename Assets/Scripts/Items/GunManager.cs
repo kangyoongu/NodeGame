@@ -29,9 +29,12 @@ public class GunManager : MonoBehaviour
 
     private void RotateGunTowardsMouse()//총 마우스 보게 회전
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 mousepointer = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 gunScreenPosition = Camera.main.WorldToScreenPoint(gunTransform.position);
         // 총 스케일 설정
-        if (mousePosition.x < transform.position.x)
+        if (mousepointer.x < transform.position.x)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
@@ -40,7 +43,7 @@ public class GunManager : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        Vector2 gunDirection = (mousePosition - gunTransform.position).normalized;
+        Vector2 gunDirection = (mousePosition - gunScreenPosition).normalized;
         float angle;
         if (gunDirection.x > 0)
         {
@@ -51,7 +54,5 @@ public class GunManager : MonoBehaviour
             angle = Mathf.Atan2(-gunDirection.y, -gunDirection.x) * Mathf.Rad2Deg;
         }
         gunTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-
     }
 }
