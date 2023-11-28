@@ -31,7 +31,8 @@ public class WaveManager : SingleTon<WaveManager>
                     time = 0;
                     if (Random.value >= 0.5f)
                     {
-                        Vector3 pos = PlayerController.Instance.transform.position + (Vector3)Random.insideUnitCircle.normalized * 7;
+                        Vector3 randDir = (Vector3)Random.insideUnitCircle.normalized;
+                        Vector3 pos = PlayerController.Instance.transform.position + randDir * 7;
                         if (pos.y <= -0.867f)
                         {
                             pos.y = -0.867f;
@@ -40,11 +41,21 @@ public class WaveManager : SingleTon<WaveManager>
                     }
                     else
                     {
-                        Vector3 pos = PlayerController.Instance.transform.position + (Vector3)Random.insideUnitCircle.normalized * 7;
+                        Vector3 randDir = Random.insideUnitCircle.normalized * 11;
+                        if (randDir.x < 11 && randDir.x >= 0)
+                        {
+                            randDir.x = 11;
+                        }
+                        else if (randDir.x <= 0 && randDir.x > -11)
+                        {
+                            randDir.x = -11;
+                        }
+                        Vector3 pos = PlayerController.Instance.transform.position + randDir;
                         if (pos.y <= -0.867f)
                         {
                             pos.y = -0.867f;
                         }
+
                         PoolManager.Instance.Pop("Ghost_02", pos, Quaternion.identity).GetComponent<Ghost>().speed = speedPerWave[GameManager.Instance.wave] + Random.Range(-0.7f, 0.7f);
                     }
                 }
@@ -67,6 +78,7 @@ public class WaveManager : SingleTon<WaveManager>
     public void StartWave()//웨이브 시작
     {
         waveTime = timePerWave[GameManager.Instance.wave];
+        PlayerController.Instance.HitCount = 0;
         PlayerController.Instance.belt[0].SetActive(true);
         for (int i = 0; i < 4; i++)
         {

@@ -52,29 +52,32 @@ public class PlayerController : SingleTon<PlayerController>
         get => hitCount;
         set
         {
-            if (value <= 3)
+            hitCount = value;
+            if (value > 0)
             {
-                hitCount = value;
-                blocks[hitCount].SetActive(true);
-                canUseWeapon[hitCount - 1] = false;
-                if(hitCount == 3)
+                if (value <= 3)
                 {
-                    belt[0].SetActive(false);
+                    blocks[hitCount].SetActive(true);
+                    canUseWeapon[hitCount - 1] = false;
+                    if (hitCount == 3)
+                    {
+                        belt[0].SetActive(false);
+                    }
+                    if ((short)CurrentWeapon < hitCount)//만약 끈 무기 쓰고있었으면
+                        CurrentWeapon = (Weapons)hitCount;//강제로 딴무기
+                    else
+                    {
+                        CurrentWeapon = CurrentWeapon;
+                    }
                 }
-                if ((short)CurrentWeapon < hitCount)//만약 끈 무기 쓰고있었으면
-                    CurrentWeapon = (Weapons)hitCount;//강제로 딴무기
                 else
                 {
-                    CurrentWeapon = CurrentWeapon;
+                    weapons[0].SetActive(false);
+                    weapons[1].SetActive(false);
+                    weapons[2].SetActive(false);
+                    weapons[3].SetActive(false);
+                    ScoreManager.Instance.GameOver();
                 }
-            }
-            else
-            {
-                weapons[0].SetActive(false);
-                weapons[1].SetActive(false);
-                weapons[2].SetActive(false);
-                weapons[3].SetActive(false);
-                ScoreManager.Instance.GameOver();
             }
         }
     }

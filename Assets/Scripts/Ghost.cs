@@ -24,7 +24,7 @@ public class Ghost : MonoBehaviour
     
     //Components
     private Rigidbody2D _rigidbody;
-    private BoxCollider2D _boxCollider;
+    private CapsuleCollider2D _boxCollider;
     
     //Managements
     private EnemyManager _enemyManager;
@@ -54,7 +54,7 @@ public class Ghost : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _boxCollider = GetComponent<BoxCollider2D>();
+        _boxCollider = GetComponent<CapsuleCollider2D>();
     }
 
     private void Start()
