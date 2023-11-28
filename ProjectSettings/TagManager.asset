@@ -9,6 +9,7 @@ TagManager:
   - Grenade
   - Rock
   - Knife
+  - GhostBullet
   layers:
   - Default
   - TransparentFX

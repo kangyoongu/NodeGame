@@ -28,3 +28,6 @@ MonoBehaviour:
   - prefab: {fileID: 3559989853226580809, guid: ef656c629dfce1d4ab4cc237daa7ae89, type: 3}
     prefabTypeName: Slash
     poolCount: 20
+  - prefab: {fileID: 781803899076409065, guid: 826aa983914b3224581f6ac6431291c3, type: 3}
+    prefabTypeName: GhostBullet
+    poolCount: 20
