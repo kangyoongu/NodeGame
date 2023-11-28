@@ -128,8 +128,12 @@ public class Ghost : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(3);
-            GameObject gameObject = PoolManager.Instance.Pop("GhostBullet", transform.position, quaternion.identity);
-            gameObject.GetComponent<Rigidbody2D>().velocity = moveDirection * power;
+            if (_boxCollider.enabled == true)
+            {
+                GameObject gameObject =
+                    PoolManager.Instance.Pop("GhostBullet", transform.position, quaternion.identity);
+                gameObject.GetComponent<Rigidbody2D>().velocity = moveDirection * power;
+            }
         }
     }
     IEnumerator Die()
