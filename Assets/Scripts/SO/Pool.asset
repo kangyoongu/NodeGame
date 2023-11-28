@@ -19,6 +19,21 @@ MonoBehaviour:
   - prefab: {fileID: 3955587093575583965, guid: 6923abda76e0c804c8594eaceebcf72c, type: 3}
     prefabTypeName: Rock
     poolCount: 10
-  - prefab: {fileID: 4874037345128888024, guid: dac75e6ea730e9a4aa06e16948ed1e63, type: 3}
-    prefabTypeName: Boom
-    poolCount: 10
+  - prefab: {fileID: 918277246902348566, guid: c993215d0640a1842902bbc70b6cdfc3, type: 3}
+    prefabTypeName: Grenade
+    poolCount: 5
+  - prefab: {fileID: 5471463871395905542, guid: 648736ad8e7400d48a2304891024bcc2, type: 3}
+    prefabTypeName: GrenadeExplosion
+    poolCount: 5
+  - prefab: {fileID: 3559989853226580809, guid: ef656c629dfce1d4ab4cc237daa7ae89, type: 3}
+    prefabTypeName: Slash
+    poolCount: 20
+  - prefab: {fileID: 781803899076409065, guid: 826aa983914b3224581f6ac6431291c3, type: 3}
+    prefabTypeName: GhostBullet
+    poolCount: 20
+  - prefab: {fileID: 2655073947468371328, guid: 7277ef44f1453a843b02ff7aabad9a62, type: 3}
+    prefabTypeName: Ghost_01
+    poolCount: 20
+  - prefab: {fileID: 5158869195517903922, guid: 4f60db44f51040c4f84f1d5cb2b850f9, type: 3}
+    prefabTypeName: Ghost_02
+    poolCount: 20

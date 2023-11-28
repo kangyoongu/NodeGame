@@ -38,6 +38,45 @@ public class PlayerController : SingleTon<PlayerController>
 
     public bool[] canUseWeapon;//각 무기 사용 가능한지
 
+    [SerializeField] private int hitCount = 4;
+    [SerializeField] private GameObject _gameOverPanel;
+
+    [SerializeField] private GameObject gunClose;
+    [SerializeField] private GameObject knifeClose;
+    [SerializeField] private GameObject bloomClose;
+    [SerializeField] private GameObject rockClose;
+    
+    public int HitCount
+    {
+        get => hitCount;
+        set
+        {
+            hitCount = value;
+            switch (hitCount)
+            {
+                case 3 : 
+                    canUseGun = false; 
+                    gunClose.SetActive(true);
+                    break;
+                case 2 : 
+                    canUseBoom = false;
+                    knifeClose.SetActive(true);
+                    break;
+                case 1 : 
+                    canUseKnife = false;
+                    bloomClose.SetActive(true);
+                    break;
+                case 0 :
+                    canUseRock = false;
+                    rockClose.SetActive(true);
+                    break;
+                case -1:
+                    _gameOverPanel.SetActive(true);
+                    Time.timeScale = 0;
+                    break;
+            }
+        }
+    }
     public GameObject[] weapons;
 
     private float hp = 100;
@@ -116,5 +155,13 @@ public class PlayerController : SingleTon<PlayerController>
     private void Jump()//점프
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.CompareTag("GhostBullet"))
+        {
+            HitCount--;
+        }
     }
 }

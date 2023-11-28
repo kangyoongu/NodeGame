@@ -6,7 +6,6 @@ public class RockScript : MonoBehaviour
 {
     Rigidbody2D rb;
     public float power = 50;
-    public float damage = 10;
     bool addforce = false;
     private void Awake()
     {

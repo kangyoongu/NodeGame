@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7dd2c1fe20544f94f89b6a4139ac362a
+guid: fcc850fc1f09221468b90cd94397ec6a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,10 +48,10 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 40
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
+  alphaUsage: 2
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -94,32 +94,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,85 +110,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Items_0
+      name: SlashEffect_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: 0.46875003, y: 0.5}
+        width: 100
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47d07f0f81355284fa185896e480bf98
-      internalID: -964572727
+      spriteID: cacc8dd5a4bc9454090c81676c4b8654
+      internalID: 381619152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_1
+      name: SlashEffect_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 100
         y: 0
-        width: 16
-        height: 16
+        width: 100
+        height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 906713f60cedcd248b50ee29ce0d9c28
-      internalID: 1686606489
+      spriteID: 7204e075a9cece749b7ef20034017a3c
+      internalID: -805453561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_2
+      name: SlashEffect_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 200
         y: 0
-        width: 16
-        height: 16
+        width: 100
+        height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbed16d21d694ed44a7d894463f8c7d1
-      internalID: 1173567567
+      spriteID: 8c7ec3b840b6b0944ba9c9df52c9322e
+      internalID: -836963635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Items_3
+      name: SlashEffect_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 300
         y: 0
-        width: 16
-        height: 16
+        width: 100
+        height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95fb59018e0f73a4380206d54493563f
-      internalID: -535585082
+      spriteID: f1be24fd72aadcf4f8dd7852e7a15a7d
+      internalID: -1214647087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashEffect_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 100
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a7cfe0eb971a1d4798b165cbe88b294
+      internalID: -2127114998
       vertices: []
       indices: 
       edges: []
@@ -230,10 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Items_0: -964572727
-      Items_1: 1686606489
-      Items_2: 1173567567
-      Items_3: -535585082
+      SlashEffect_0: 381619152
+      SlashEffect_1: -805453561
+      SlashEffect_2: -836963635
+      SlashEffect_3: -1214647087
+      SlashEffect_4: -2127114998
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
