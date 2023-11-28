@@ -67,6 +67,12 @@ public class WaveManager : SingleTon<WaveManager>
     public void StartWave()//웨이브 시작
     {
         waveTime = timePerWave[GameManager.Instance.wave];
+        PlayerController.Instance.belt[0].SetActive(true);
+        for (int i = 0; i < 4; i++)
+        {
+            PlayerController.Instance.canUseWeapon[i] = true;
+            PlayerController.Instance.blocks[i].SetActive(false);
+        }
         spawn = true;
     }
 }
