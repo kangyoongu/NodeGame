@@ -45,13 +45,14 @@ public class BoomScript : MonoBehaviour
     }
     IEnumerator Timer()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2f);
         //폭탄터짐
         GetComponent<SpriteRenderer>().enabled = false;
         particleSystem.Play();
         playParticle = true;
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 4);
+        PoolManager.Instance.Pop("Explosion", transform.position, Quaternion.identity);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2);
 
         // 가져온 모든 오브젝트에 대해 처리
         foreach (Collider2D collider in colliders)

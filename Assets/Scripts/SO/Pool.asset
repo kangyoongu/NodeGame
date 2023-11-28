@@ -40,3 +40,9 @@ MonoBehaviour:
   - prefab: {fileID: 4874037345128888024, guid: dac75e6ea730e9a4aa06e16948ed1e63, type: 3}
     prefabTypeName: Boom
     poolCount: 20
+  - prefab: {fileID: 4944408272854912807, guid: 1bd2b1cef9205fe4fa200197191f5825, type: 3}
+    prefabTypeName: RockBreak
+    poolCount: 20
+  - prefab: {fileID: 4944408272854912807, guid: c43731ce95a0a134cb3bc290b271d0d3, type: 3}
+    prefabTypeName: Explosion
+    poolCount: 20
