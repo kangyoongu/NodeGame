@@ -20,6 +20,9 @@ public class PlayerController : SingleTon<PlayerController>
 
     private Rigidbody2D rb;
     private bool isGrounded;//점프가능?
+    public GameObject[] blocks;
+    public RectTransform[] points;
+    public RectTransform check;
 
     private Weapons currentWeapon = Weapons.Gun;//지금무기
     public Weapons CurrentWeapon
@@ -32,48 +35,40 @@ public class PlayerController : SingleTon<PlayerController>
             weapons[1].SetActive(false);
             weapons[2].SetActive(false);
             weapons[3].SetActive(false);
-            weapons[(short)value].SetActive(true);
+            weapons[(short)currentWeapon].SetActive(true);
+            check.anchoredPosition = points[(short)currentWeapon].GetComponent<RectTransform>().anchoredPosition;
         }
     }
 
     public bool[] canUseWeapon;//각 무기 사용 가능한지
 
-    [SerializeField] private int hitCount = 4;
+    [SerializeField] private int hitCount = 0;
     [SerializeField] private GameObject _gameOverPanel;
-
-    [SerializeField] private GameObject gunClose;
-    [SerializeField] private GameObject knifeClose;
-    [SerializeField] private GameObject bloomClose;
-    [SerializeField] private GameObject rockClose;
     
     public int HitCount
     {
         get => hitCount;
         set
         {
-            hitCount = value;
-            switch (hitCount)
+            if (value <= 3)
             {
-                case 3 : 
-                    canUseGun = false; 
-                    gunClose.SetActive(true);
-                    break;
-                case 2 : 
-                    canUseBoom = false;
-                    knifeClose.SetActive(true);
-                    break;
-                case 1 : 
-                    canUseKnife = false;
-                    bloomClose.SetActive(true);
-                    break;
-                case 0 :
-                    canUseRock = false;
-                    rockClose.SetActive(true);
-                    break;
-                case -1:
-                    _gameOverPanel.SetActive(true);
-                    Time.timeScale = 0;
-                    break;
+                hitCount = value;
+                blocks[hitCount].SetActive(true);
+                canUseWeapon[hitCount - 1] = false;
+                if ((short)CurrentWeapon < hitCount)//만약 끈 무기 쓰고있었으면
+                    CurrentWeapon = (Weapons)hitCount;//강제로 딴무기
+                else
+                {
+                    CurrentWeapon = CurrentWeapon;
+                }
+            }
+            else
+            {
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(false);
+                weapons[2].SetActive(false);
+                weapons[3].SetActive(false);
+                ScoreManager.Instance.GameOver();
             }
         }
     }
@@ -119,7 +114,7 @@ public class PlayerController : SingleTon<PlayerController>
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && canUseWeapon[0])
         {
-            currentWeapon = Weapons.Gun;
+            CurrentWeapon = Weapons.Gun;
             weapons[0].SetActive(true);
             weapons[1].SetActive(false);
             weapons[2].SetActive(false);
@@ -127,7 +122,7 @@ public class PlayerController : SingleTon<PlayerController>
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && canUseWeapon[1])
         {
-            currentWeapon = Weapons.Boom;
+            CurrentWeapon = Weapons.Boom;
             weapons[0].SetActive(false);
             weapons[1].SetActive(true);
             weapons[2].SetActive(false);
@@ -135,7 +130,7 @@ public class PlayerController : SingleTon<PlayerController>
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && canUseWeapon[2])
         {
-            currentWeapon = Weapons.Knife;
+            CurrentWeapon = Weapons.Knife;
             weapons[0].SetActive(false);
             weapons[1].SetActive(false);
             weapons[2].SetActive(true);
@@ -143,7 +138,7 @@ public class PlayerController : SingleTon<PlayerController>
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4) && canUseWeapon[3])
         {
-            currentWeapon = Weapons.Rock;
+            CurrentWeapon = Weapons.Rock;
             weapons[0].SetActive(false);
             weapons[1].SetActive(false);
             weapons[2].SetActive(false);
@@ -161,7 +156,7 @@ public class PlayerController : SingleTon<PlayerController>
     {
         if (other.transform.CompareTag("GhostBullet"))
         {
-            HitCount--;
+            HitCount++;
         }
     }
 }

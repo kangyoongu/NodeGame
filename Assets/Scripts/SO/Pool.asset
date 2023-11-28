@@ -37,3 +37,6 @@ MonoBehaviour:
   - prefab: {fileID: 5158869195517903922, guid: 4f60db44f51040c4f84f1d5cb2b850f9, type: 3}
     prefabTypeName: Ghost_02
     poolCount: 20
+  - prefab: {fileID: 4874037345128888024, guid: dac75e6ea730e9a4aa06e16948ed1e63, type: 3}
+    prefabTypeName: Boom
+    poolCount: 20

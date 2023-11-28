@@ -9,7 +9,7 @@ public class BoomScript : MonoBehaviour
     public float damage = 10;
     bool addforce = false;
     bool playParticle = false;
-    private ParticleSystem particleSystem;
+    private new ParticleSystem particleSystem;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,6 +19,7 @@ public class BoomScript : MonoBehaviour
     private void OnEnable()
     {
         addforce = true;
+        StartCoroutine("Timer");
     }
     private void Update()
     {
@@ -37,11 +38,6 @@ public class BoomScript : MonoBehaviour
             PoolManager.Instance.Push("Rock", gameObject);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        StopCoroutine("Timer");
-        StartCoroutine("Timer");
-    }
     private void OnDisable()
     {
         rb.velocity = Vector2.zero;
@@ -49,9 +45,23 @@ public class BoomScript : MonoBehaviour
     }
     IEnumerator Timer()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
+        //폭탄터짐
         GetComponent<SpriteRenderer>().enabled = false;
-        particleSystem.Play();//여기서폭탄이터지니까 주위 그 뭐냐 적들 데미지 줘
+        particleSystem.Play();
         playParticle = true;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 4);
+
+        // 가져온 모든 오브젝트에 대해 처리
+        foreach (Collider2D collider in colliders)
+        {
+            Ghost g = null;
+            if (collider.TryGetComponent(out g))
+            {
+                g.Hp -= damage;
+                ScoreManager.Instance.CurrentScore += 30;
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ public class WaveManager : SingleTon<WaveManager>
     float waveTime = 0;//웨이브 끝나는 시간
     public float[] timePerWave;
     public float[] spawnPerWave;
-    public float[] disableWeaponWave;
+    public float[] speedPerWave;
     float randomTime = 0;
     bool spawn = false;
     public TextMeshProUGUI timer;
@@ -19,42 +19,53 @@ public class WaveManager : SingleTon<WaveManager>
     }
     void Update()
     {
-        timer.text = waveTime.ToString("0") + "s";
-        if(spawn == true)
+        if (GameManager.Instance.playingGame)
         {
-            time += Time.deltaTime;
-            if(time+randomTime >= spawnPerWave[GameManager.Instance.wave])//스폰시간 약간 랜덤하게
+            timer.text = waveTime.ToString("0") + "s";
+            if (spawn == true)
             {
-                randomTime = Random.Range(-1f, 1f);
+                time += Time.deltaTime;
+                if (time + randomTime >= spawnPerWave[GameManager.Instance.wave])//스폰시간 약간 랜덤하게
+                {
+                    randomTime = Random.Range(-1f, 1f);
+                    time = 0;
+                    if (Random.value >= 0.5f)
+                    {
+                        Vector3 pos = PlayerController.Instance.transform.position + (Vector3)Random.insideUnitCircle.normalized * 7;
+                        if (pos.y <= -0.867f)
+                        {
+                            pos.y = -0.867f;
+                        }
+                        PoolManager.Instance.Pop("Ghost_01", pos, Quaternion.identity).GetComponent<Ghost>().speed = speedPerWave[GameManager.Instance.wave] + Random.Range(-0.7f, 0.7f);
+                    }
+                    else
+                    {
+                        Vector3 pos = PlayerController.Instance.transform.position + (Vector3)Random.insideUnitCircle.normalized * 7;
+                        if (pos.y <= -0.867f)
+                        {
+                            pos.y = -0.867f;
+                        }
+                        PoolManager.Instance.Pop("Ghost_02", pos, Quaternion.identity).GetComponent<Ghost>().speed = speedPerWave[GameManager.Instance.wave] + Random.Range(-0.7f, 0.7f);
+                    }
+                }
+                waveTime -= Time.deltaTime;
+                if (waveTime <= 0)
+                {
+                    waveTime = 0;
+                    spawn = false;
+                    GameManager.Instance.wave++;
+                    UIManager.Instance.WaveText();
+                }
+            }
+            else
+            {
                 time = 0;
-                //적 스폰 코드
-            }
-            waveTime -= Time.deltaTime;
-            if(waveTime <= 0)
-            {
                 waveTime = 0;
-                spawn = false;
-                UIManager.Instance.WaveText();
-                GameManager.Instance.wave++;
             }
-        }
-        else
-        {
-            time = 0;
-            waveTime = 0;
         }
     }
     public void StartWave()//웨이브 시작
     {
-        for(int i = 0; i < disableWeaponWave.Length; i++)//무기 끄기
-        {
-            if(GameManager.Instance.wave == disableWeaponWave[i])
-            {
-                PlayerController.Instance.canUseWeapon[i] = false;
-                if((short)PlayerController.Instance.CurrentWeapon >= i)//만약 끈 무기 쓰고있었으면
-                    PlayerController.Instance.CurrentWeapon = (Weapons)i-1;//강제로 딴무기
-            }
-        }
         waveTime = timePerWave[GameManager.Instance.wave];
         spawn = true;
     }

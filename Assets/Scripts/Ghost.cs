@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.Events;
 
 public enum GhostType
 {
@@ -26,15 +28,33 @@ public class Ghost : MonoBehaviour
     
     //Managements
     private EnemyManager _enemyManager;
-    
+
+    public Transform hpbar;
+    public UnityEvent dieEvent;
+    public UnityEvent startEvent;
     //Controllers
-    
+    private float hp = 100;
+    public float Hp
+    {
+        get => hp;
+        set
+        {
+            if (hp > 0)
+            {
+                hp = value;
+                if (hp <= 0)
+                {
+                    hp = 0;
+                    StartCoroutine(Die());
+                }
+                hpbar.DOScaleX(hp * 0.01f, 0.4f);
+            }
+        }
+    }
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
-
-       
     }
 
     private void Start()
@@ -49,47 +69,51 @@ public class Ghost : MonoBehaviour
         {
             Fire(firePower);
         }
+        startEvent?.Invoke();
     }
 
 
     private void Update()
-    { 
-        float playerToMyDistance = Vector3.Distance(_playerTransform.position, transform.position);
-        if (_ghostType == GhostType.Fly)
+    {
+        if (_boxCollider.enabled == true)
         {
-            if (moveDirection.x > 0)
+            float playerToMyDistance = Vector3.Distance(_playerTransform.position, transform.position);
+            if (_ghostType == GhostType.Fly)
             {
-                transform.localScale = new Vector3(1, 1);
+                if (moveDirection.x > 0)
+                {
+                    transform.localScale = new Vector3(1, 1);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(-1, 1);
+                }
+
+                if (playerToMyDistance > 5)
+                {
+                    moveDirection = (_playerTransform.position - transform.position).normalized;
+                }
+                _rigidbody.velocity = moveDirection * speed;
             }
             else
             {
-                transform.localScale = new Vector3(-1, 1);
-            }
-            
-            if (playerToMyDistance > 5)
-            {
+                if (moveDirection.x > 0)
+                {
+                    transform.localScale = new Vector3(1, 1);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(-1, 1);
+                }
                 moveDirection = (_playerTransform.position - transform.position).normalized;
-            }
-            _rigidbody.velocity = moveDirection * speed;
-        }
-        else
-        {
-            if (moveDirection.x > 0)
-            {
-                transform.localScale = new Vector3(1, 1);
-            }
-            else
-            {
-                transform.localScale = new Vector3(-1, 1);
-            }
-            moveDirection = (_playerTransform.position - transform.position).normalized;
-            if (playerToMyDistance > 4)
-            {
-                _rigidbody.velocity = new Vector2(moveDirection.x * speed, 0);
-            }
-            else
-            {
-                _rigidbody.velocity = new Vector2(0, 0);
+                if (playerToMyDistance > 4)
+                {
+                    _rigidbody.velocity = new Vector2(moveDirection.x * speed, 0);
+                }
+                else
+                {
+                    _rigidbody.velocity = new Vector2(0, 0);
+                }
             }
         }
     }
@@ -107,5 +131,14 @@ public class Ghost : MonoBehaviour
             GameObject gameObject = PoolManager.Instance.Pop("GhostBullet", transform.position, quaternion.identity);
             gameObject.GetComponent<Rigidbody2D>().velocity = moveDirection * power;
         }
+    }
+    IEnumerator Die()
+    {
+        dieEvent?.Invoke();
+        yield return new WaitForSeconds(4);
+        if (_ghostType == GhostType.Fly)
+            PoolManager.Instance.Push("Ghost_02", gameObject);
+        else
+            PoolManager.Instance.Push("Ghost_01", gameObject);
     }
 }
