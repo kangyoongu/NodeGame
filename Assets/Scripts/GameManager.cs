@@ -19,7 +19,7 @@ public class GameManager : SingleTon<GameManager>
     {
         UIManager.Instance.PlayUIIn();
         UIManager.Instance.MainUIOut();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         startCvc.Priority = 5;
         gun.SetActive(true);
         playingGame = true;

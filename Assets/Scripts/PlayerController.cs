@@ -24,6 +24,8 @@ public class PlayerController : SingleTon<PlayerController>
     public RectTransform[] points;
     public RectTransform check;
 
+    public GameObject[] belt;
+
     private Weapons currentWeapon = Weapons.Gun;//지금무기
     public Weapons CurrentWeapon
     {
@@ -50,25 +52,32 @@ public class PlayerController : SingleTon<PlayerController>
         get => hitCount;
         set
         {
-            if (value <= 3)
+            hitCount = value;
+            if (value > 0)
             {
-                hitCount = value;
-                blocks[hitCount].SetActive(true);
-                canUseWeapon[hitCount - 1] = false;
-                if ((short)CurrentWeapon < hitCount)//만약 끈 무기 쓰고있었으면
-                    CurrentWeapon = (Weapons)hitCount;//강제로 딴무기
+                if (value <= 3)
+                {
+                    blocks[hitCount].SetActive(true);
+                    canUseWeapon[hitCount - 1] = false;
+                    if (hitCount == 3)
+                    {
+                        belt[0].SetActive(false);
+                    }
+                    if ((short)CurrentWeapon < hitCount)//만약 끈 무기 쓰고있었으면
+                        CurrentWeapon = (Weapons)hitCount;//강제로 딴무기
+                    else
+                    {
+                        CurrentWeapon = CurrentWeapon;
+                    }
+                }
                 else
                 {
-                    CurrentWeapon = CurrentWeapon;
+                    weapons[0].SetActive(false);
+                    weapons[1].SetActive(false);
+                    weapons[2].SetActive(false);
+                    weapons[3].SetActive(false);
+                    ScoreManager.Instance.GameOver();
                 }
-            }
-            else
-            {
-                weapons[0].SetActive(false);
-                weapons[1].SetActive(false);
-                weapons[2].SetActive(false);
-                weapons[3].SetActive(false);
-                ScoreManager.Instance.GameOver();
             }
         }
     }
@@ -107,6 +116,10 @@ public class PlayerController : SingleTon<PlayerController>
             isGrounded = Physics2D.Raycast(transform.position, Vector2.down, distance, groundLayer);
 
             ChangeWeaponCheck();//무기 바꾸는지 체크
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
 

@@ -45,7 +45,7 @@ public class BoomScript : MonoBehaviour
     }
     IEnumerator Timer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.3f);
         //ÆøÅºÅÍÁü
         GetComponent<SpriteRenderer>().enabled = false;
         particleSystem.Play();

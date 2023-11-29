@@ -29,7 +29,7 @@ public class ScoreManager : MonoSingleton<ScoreManager>
         {
             PlayerPrefs.SetInt("Best", 0);
         }
-        bestText.text = PlayerPrefs.GetInt("Best").ToString("0");
+        bestText.text = "Best : " + PlayerPrefs.GetInt("Best").ToString("0");
     }
     public void GameOver()
     {

@@ -24,7 +24,7 @@ public class Ghost : MonoBehaviour
     
     //Components
     private Rigidbody2D _rigidbody;
-    private BoxCollider2D _boxCollider;
+    private CapsuleCollider2D _boxCollider;
     
     //Managements
     private EnemyManager _enemyManager;
@@ -54,7 +54,7 @@ public class Ghost : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _boxCollider = GetComponent<BoxCollider2D>();
+        _boxCollider = GetComponent<CapsuleCollider2D>();
     }
 
     private void Start()
@@ -128,8 +128,12 @@ public class Ghost : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(3);
-            GameObject gameObject = PoolManager.Instance.Pop("GhostBullet", transform.position, quaternion.identity);
-            gameObject.GetComponent<Rigidbody2D>().velocity = moveDirection * power;
+            if (_boxCollider.enabled == true)
+            {
+                GameObject gameObject =
+                    PoolManager.Instance.Pop("GhostBullet", transform.position, quaternion.identity);
+                gameObject.GetComponent<Rigidbody2D>().velocity = moveDirection * power;
+            }
         }
     }
     IEnumerator Die()
